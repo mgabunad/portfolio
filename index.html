@@ -213,6 +213,26 @@
   .proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;}
   .proj-tags span{font-family:var(--mono); font-size:11px; background:var(--bg); border:1px solid var(--line); padding:3px 8px; border-radius:6px; color:var(--sage);}
 
+  /* GITHUB ACTIVITY */
+  .activity-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:18px;}
+  @media (max-width:760px){.activity-grid{grid-template-columns:1fr;}}
+  .activity-feed .terminal-body{min-height:220px; max-height:300px; overflow-y:auto; font-size:12.8px; line-height:1.8;}
+  .activity-feed .term-line{white-space:pre-wrap; word-break:break-word; margin-bottom:2px;}
+  .activity-feed .state{color:#93A9A2; font-style:italic;}
+  .activity-side{display:flex; flex-direction:column; gap:18px;}
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:18px 22px; display:flex; gap:24px;
+  }
+  .stat-card .stat b{display:block; font-family:var(--disp); font-weight:700; font-size:24px; color:var(--navy);}
+  .stat-card .stat span{font-family:var(--mono); font-size:11px; color:var(--sage); text-transform:uppercase; letter-spacing:.05em;}
+  .chart-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:16px; flex:1;
+  }
+  .chart-card img{width:100%; border-radius:6px;}
+  .activity-note{font-family:var(--mono); font-size:11px; color:var(--sage); margin-top:14px;}
+
   /* CONTACT / FOOTER */
   footer{background:var(--navy); color:#EAF3F0; padding:56px 0 40px; scroll-margin-top:80px;}
   footer .section-head h2{color:#fff;}
@@ -237,6 +257,7 @@
       <button class="nav-link-btn" data-target="experience">Experience</button>
       <button class="nav-link-btn" data-target="certifications">Certifications</button>
       <button class="nav-link-btn" data-target="projects">Projects</button>
+      <button class="nav-link-btn" data-target="activity">Activity</button>
       <button class="nav-link-btn" data-target="contact">Contact</button>
       <a href="https://raw.githubusercontent.com/mgabunad/portfolio/main/Mayjhon_Gabunada_Resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
       <a href="https://github.com/mgabunad" target="_blank" rel="noopener">GitHub ↗</a>
@@ -459,9 +480,38 @@
   </div>
 </section>
 
+<section id="activity">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">06</span><h2>GitHub Activity</h2></div>
+    <div class="activity-grid">
+      <div class="terminal activity-feed">
+        <div class="terminal-bar">
+          <span></span><span></span><span></span>
+          <span class="label">mgabunad@github — activity.log</span>
+        </div>
+        <div class="terminal-body" id="ghFeed">
+          <div class="term-line state">connecting to api.github.com<span class="caret"></span></div>
+        </div>
+      </div>
+      <div class="activity-side">
+        <div class="stat-card">
+          <div class="stat"><b id="ghRepos">—</b><span>public repos</span></div>
+          <div class="stat"><b id="ghFollowers">—</b><span>followers</span></div>
+        </div>
+        <div class="chart-card">
+          <img src="https://ghchart.rshah.org/E8A33D/mgabunad" alt="mgabunad GitHub contribution graph">
+        </div>
+      </div>
+    </div>
+    <div class="activity-note">Live from github.com/mgabunad · no cache</div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <footer id="contact">
   <div class="wrap">
-    <div class="section-head"><span class="tag">06</span><h2>Contact</h2></div>
+    <div class="section-head"><span class="tag">07</span><h2>Contact</h2></div>
     <div class="contact-grid">
       <div class="contact-item">
         <div class="k">Email</div>
@@ -483,6 +533,10 @@
       <div class="contact-item">
         <div class="k">GitHub</div>
         <a href="https://github.com/mgabunad" target="_blank" rel="noopener">github.com/mgabunad</a>
+      </div>
+      <div class="contact-item">
+        <div class="k">Live Site</div>
+        <a href="https://mgabunad.github.io/portfolio/" target="_blank" rel="noopener">mgabunad.github.io/portfolio</a>
       </div>
       <div class="contact-item">
         <div class="k">Resume</div>
@@ -508,7 +562,7 @@
     });
   });
 
-  var sectionIds = ['about','skills','experience','certifications','projects','contact'];
+  var sectionIds = ['about','skills','experience','certifications','projects','activity','contact'];
   var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nav-links .nav-link-btn'));
   function setActiveLink(){
     var scrollPos = window.scrollY + 100;
@@ -523,6 +577,71 @@
   }
   window.addEventListener('scroll', setActiveLink);
   window.addEventListener('load', setActiveLink);
+
+  // GitHub live activity
+  (function(){
+    var USERNAME = "mgabunad";
+    var feedEl = document.getElementById("ghFeed");
+
+    function timeAgo(dateStr){
+      var diff = Math.floor((Date.now() - new Date(dateStr).getTime())/1000);
+      if(diff < 60) return diff + "s ago";
+      if(diff < 3600) return Math.floor(diff/60) + "m ago";
+      if(diff < 86400) return Math.floor(diff/3600) + "h ago";
+      return Math.floor(diff/86400) + "d ago";
+    }
+
+    function lineFor(evt){
+      var repo = '<span class="c1">' + evt.repo.name + '</span>';
+      var ts = '<span class="c3">' + timeAgo(evt.created_at) + '</span>';
+      switch(evt.type){
+        case "PushEvent": {
+          var n = evt.payload.commits ? evt.payload.commits.length : 1;
+          var msg = (evt.payload.commits && evt.payload.commits.length)
+            ? evt.payload.commits[evt.payload.commits.length-1].message.split("\n")[0].slice(0,60)
+            : "";
+          return '<span class="c2">$</span> git push ' + repo + '  (' + n + ' commit' + (n>1?'s':'') + ') ' + ts + '\n  \u2192 ' + msg;
+        }
+        case "CreateEvent":
+          return '<span class="c2">$</span> git init ' + repo + '  ' + ts;
+        case "WatchEvent":
+          return '<span class="c2">$</span> star ' + repo + '  ' + ts;
+        case "IssuesEvent":
+          return '<span class="c2">$</span> issue ' + evt.payload.action + ' on ' + repo + '  ' + ts;
+        case "PullRequestEvent":
+          return '<span class="c2">$</span> pr ' + evt.payload.action + ' on ' + repo + '  ' + ts;
+        default:
+          return '<span class="c2">$</span> ' + evt.type.replace("Event","").toLowerCase() + ' on ' + repo + '  ' + ts;
+      }
+    }
+
+    fetch('https://api.github.com/users/' + USERNAME + '/events/public')
+      .then(function(res){ if(!res.ok) throw new Error('rate limited'); return res.json(); })
+      .then(function(events){
+        if(!events.length){
+          feedEl.innerHTML = '<div class="term-line state">no recent public activity</div>';
+          return;
+        }
+        feedEl.innerHTML = events.slice(0,10).map(function(e){
+          return '<div class="term-line">' + lineFor(e) + '</div>';
+        }).join('');
+        feedEl.innerHTML += '<div class="term-line"><span class="c2">$</span> <span class="caret"></span></div>';
+      })
+      .catch(function(){
+        feedEl.innerHTML = '<div class="term-line state">couldn\'t load live feed right now (GitHub caps unauthenticated requests at 60/hr per visitor) \u2014 try refreshing shortly.</div>';
+      });
+
+    fetch('https://api.github.com/users/' + USERNAME)
+      .then(function(res){ if(!res.ok) throw new Error(); return res.json(); })
+      .then(function(data){
+        document.getElementById('ghRepos').textContent = data.public_repos != null ? data.public_repos : '\u2014';
+        document.getElementById('ghFollowers').textContent = data.followers != null ? data.followers : '\u2014';
+      })
+      .catch(function(){
+        document.getElementById('ghRepos').textContent = '\u2014';
+        document.getElementById('ghFollowers').textContent = '\u2014';
+      });
+  })();
 </script>
 
 </body>
