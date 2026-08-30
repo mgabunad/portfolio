@@ -425,6 +425,61 @@
   .foot-social{display:flex; gap:18px; font-family:var(--mono); font-size:12px;}
   .foot-social a{text-decoration:none; color:var(--ink-dim); transition:color .2s;}
   .foot-social a:hover{color:var(--accent);}
+
+  .comp-subblock {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #2a2a33;
+    margin-bottom: 3rem;
+  }
+
+  .comp-subblock__label {
+    color: #7a7a85;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .comp-card {
+    background-color: #16161c;
+    border: 1px solid #2a2a33;
+    border-top: 3px solid transparent;
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .comp-card:hover {
+    transform: translateY(-3px);
+    background-color: #1e1e26;
+  }
+
+  .comp-card h3 {
+    color: #f0e4d8;
+    font-size: 1rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .comp-card p {
+    color: #9a9aa5;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .comp-card--orange { border-top-color: #d98a4f; }
+  .comp-card--blue   { border-top-color: #5b8fd9; }
+  .comp-card--purple { border-top-color: #9b7fd9; }
+  .comp-card--green  { border-top-color: #6fbf7f; }
+  .comp-card--teal   { border-top-color: #4fb8b0; }
+  .comp-card--pink   { border-top-color: #d97fa8; }
 </style></head>
 <body>
 
@@ -586,62 +641,6 @@
 </div>
   </div>
 
-<style>
-  .comp-subblock {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px dashed #2a2a33;
-    margin-bottom: 3rem;
-  }
-
-  .comp-subblock__label {
-    color: #7a7a85;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .comp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-  }
-
-  .comp-card {
-    background-color: #16161c;
-    border: 1px solid #2a2a33;
-    border-top: 3px solid transparent;
-    border-radius: 8px;
-    padding: 1.1rem 1.3rem;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
-
-  .comp-card:hover {
-    transform: translateY(-3px);
-    background-color: #1e1e26;
-  }
-
-  .comp-card h3 {
-    color: #f0e4d8;
-    font-size: 1rem;
-    margin: 0 0 0.4rem;
-  }
-
-  .comp-card p {
-    color: #9a9aa5;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .comp-card--orange { border-top-color: #d98a4f; }
-  .comp-card--blue   { border-top-color: #5b8fd9; }
-  .comp-card--purple { border-top-color: #9b7fd9; }
-  .comp-card--green  { border-top-color: #6fbf7f; }
-  .comp-card--teal   { border-top-color: #4fb8b0; }
-  .comp-card--pink   { border-top-color: #d97fa8; }
-</style>
 </section>
 
 <hr class="divider">
