@@ -498,7 +498,6 @@
       <button class="nav-link-btn" data-target="experience">Experience</button>
       <button class="nav-link-btn" data-target="certifications">Certifications</button>
       <button class="nav-link-btn" data-target="projects">Projects</button>
-      <button class="nav-link-btn" data-target="testimonials">Testimonials</button>
       <button class="nav-link-btn" data-target="activity">Activity</button>
       <button class="nav-link-btn" data-target="contact">Contact</button>
       <span class="nav-divider"></span>
@@ -824,48 +823,6 @@
 
 <hr class="divider">
 
-<section id="testimonials">
-  <div class="wrap">
-    <div class="section-head reveal"><span class="tag" style="--tag-color:var(--c-testimonials)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4Z"/></svg><i>--</i></span><h2>What People Say</h2><span class="rule"></span></div>
-    <span class="testi-note reveal">-- placeholder testimonials, replace with real feedback</span>
-    <div class="card-grid reveal">
-      <div class="card testi-card">
-        <span class="testi-quote">&ldquo;</span>
-        <p class="testi-text">Mayjhon consistently delivered clear, well-documented code and communicated progress every step of the way. A pleasure to work with.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">JC</div>
-          <div>
-            <div class="testi-name">Jane Cliente</div>
-            <div class="testi-role">Placeholder — Project Client</div>
-          </div>
-        </div>
-      </div>
-      <div class="card testi-card">
-        <span class="testi-quote">&ldquo;</span>
-        <p class="testi-text">Reliable, detail-oriented, and fast to pick up new requirements. Highly recommended for any web development project.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">RS</div>
-          <div>
-            <div class="testi-name">Robert Santos</div>
-            <div class="testi-role">Placeholder — Team Lead</div>
-          </div>
-        </div>
-      </div>
-      <div class="card testi-card">
-        <span class="testi-quote">&ldquo;</span>
-        <p class="testi-text">Great problem-solving skills and a strong eye for data. Turned messy spreadsheets into clear, actionable dashboards.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">MD</div>
-          <div>
-            <div class="testi-name">Maria Delgado</div>
-            <div class="testi-role">Placeholder — Data Analytics Mentor</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="activity">
   <div class="wrap">
     <div class="section-head reveal"><span class="tag" style="--tag-color:var(--c-activity)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 7.5 12 9.5 6 14 18 16 12 21 12"/></svg><i>06</i></span><h2>GitHub Activity</h2><span class="rule"></span></div>
@@ -970,7 +927,7 @@
     });
   });
 
-  var sectionIds = ['about','skills','experience','certifications','projects','testimonials','activity','contact'];
+  var sectionIds = ['about','skills','experience','certifications','projects','activity','contact'];
   var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nav-links .nav-link-btn'));
   function setActiveLink(){
     var scrollPos = window.scrollY + 110;
