@@ -1,6 +1,6 @@
 # Portfolio — Mayjhon V. Gabunada
 
-Personal portfolio site for **Mayjhon V. Gabunada**, a Full Stack Web Development & Data Analytics student based in Cebu City, Philippines.
+Personal portfolio site for **Mayjhon V. Gabunada**, a Full Stack Web Developer and Data Analyst based in Cebu City, Philippines.
 
 🔗 **Live site:** [mgabunad.github.io/portfolio](https://mgabunad.github.io/portfolio/)
 
